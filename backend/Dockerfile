@@ -3,16 +3,18 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files
+# Copy root package files (for workspaces)
 COPY package*.json ./
+COPY backend/package*.json ./backend/
 
-# Install dependencies
+# Install all dependencies (including dev dependencies for build)
 RUN npm install
 
-# Copy source code
-COPY . .
+# Copy backend source code only
+COPY backend ./backend
 
-# Build TypeScript
+# Build the backend
+WORKDIR /app/backend
 RUN npm run build
 
 # Production stage
@@ -20,12 +22,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install production dependencies only
+# Copy only production dependencies
 COPY package*.json ./
-RUN npm install --only=production
+COPY backend/package*.json ./backend/
+
+# Install production dependencies only
+RUN npm install --only=production --workspace=backend
 
 # Copy built code from builder
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/backend/dist ./backend/dist
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
@@ -35,4 +40,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 EXPOSE 3001
 
 # Run the application
+WORKDIR /app/backend
 CMD ["node", "dist/server.js"]

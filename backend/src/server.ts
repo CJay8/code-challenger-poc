@@ -3,10 +3,10 @@ import cors from 'cors';
 import { createServer } from 'http';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
-import swapRoutes from './routes/swap';
-import healthRoutes from './routes/health';
-import { swaggerSpec } from './config/swagger';
-import { PriceStreamService } from './services/PriceStreamService';
+import swapRoutes from './routes/swap.js';
+import healthRoutes from './routes/health.js';
+import { swaggerSpec } from './config/swagger.js';
+import { PriceStreamService } from './services/PriceStreamService.js';
 
 dotenv.config();
 
