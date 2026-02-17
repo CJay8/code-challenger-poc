@@ -160,8 +160,8 @@ export function CodeAuditor() {
                                 onClick={() => setSelectedFile(file)}
                                 whileHover={{ x: 4 }}
                                 className={`w-full text-left px-3 py-2 rounded text-sm transition-all flex items-center gap-2 ${selectedFile.path === file.path
-                                        ? 'bg-cyber-cyan bg-opacity-20 text-cyber-cyan border-l-2 border-cyber-cyan'
-                                        : 'text-terminal-gray-300 hover:bg-white hover:bg-opacity-5'
+                                    ? 'bg-cyber-cyan bg-opacity-20 text-cyber-cyan border-l-2 border-cyber-cyan'
+                                    : 'text-terminal-gray-300 hover:bg-white hover:bg-opacity-5'
                                     }`}
                             >
                                 <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -187,7 +187,7 @@ export function CodeAuditor() {
                         </svg>
                         <span className="text-sm font-mono text-white">{selectedFile.name}</span>
                         {isRefactoredApplied && (
-                            <motion.span 
+                            <motion.span
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 className="px-2 py-0.5 rounded-full text-xs bg-cyber-green bg-opacity-20 text-cyber-green border border-cyber-green"
@@ -211,9 +211,9 @@ export function CodeAuditor() {
 
                     {/* Code view */}
                     <div className="flex-1 glass rounded-lg overflow-hidden">
-                        <div 
+                        <div
                             ref={codeContainerRef}
-                            className="h-full overflow-y-auto overflow-x-auto bg-terminal-darker" 
+                            className="h-full overflow-y-auto overflow-x-auto bg-terminal-darker"
                             style={{ maxHeight: 'calc(100vh - 300px)' }}
                         >
                             <div className="min-w-max">
@@ -240,7 +240,7 @@ export function CodeAuditor() {
                                         {selectedIssue.suggestion}
                                     </div>
                                     <div className="flex gap-2">
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 setActiveTab('refactored');
                                             }}
@@ -248,7 +248,7 @@ export function CodeAuditor() {
                                         >
                                             Apply Fix
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => {
                                                 setActiveTab('issues');
                                             }}
@@ -280,8 +280,8 @@ export function CodeAuditor() {
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={`flex-1 px-4 py-3 text-xs font-medium capitalize transition-all ${activeTab === tab
-                                        ? 'text-cyber-cyan border-b-2 border-cyber-cyan bg-cyber-cyan bg-opacity-5'
-                                        : 'text-terminal-gray-400 hover:text-white hover:bg-white hover:bg-opacity-5'
+                                    ? 'text-cyber-cyan border-b-2 border-cyber-cyan bg-cyber-cyan bg-opacity-5'
+                                    : 'text-terminal-gray-400 hover:text-white hover:bg-white hover:bg-opacity-5'
                                     }`}
                             >
                                 {tab}
@@ -307,14 +307,14 @@ export function CodeAuditor() {
                                                 whileHover={{ scale: 1.02 }}
                                                 onClick={() => setSelectedIssue(issue)}
                                                 className={`p-3 rounded-lg cursor-pointer transition-all border ${selectedIssue?.id === issue.id
-                                                        ? `${getSeverityColor(issue.severity)} ${getSeverityBg(issue.severity)} border-opacity-50`
-                                                        : 'border-terminal-gray-700 hover:border-cyber-cyan'
+                                                    ? `${getSeverityColor(issue.severity)} ${getSeverityBg(issue.severity)} border-opacity-50`
+                                                    : 'border-terminal-gray-700 hover:border-cyber-cyan'
                                                     }`}
                                             >
                                                 <div className="flex items-start gap-2 mb-2">
                                                     <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${issue.severity === 'critical' ? 'bg-cyber-red' :
-                                                            issue.severity === 'warning' ? 'bg-cyber-yellow' :
-                                                                'bg-cyber-cyan'
+                                                        issue.severity === 'warning' ? 'bg-cyber-yellow' :
+                                                            'bg-cyber-cyan'
                                                         }`} />
                                                     <div className="flex-1 min-w-0">
                                                         <div className="text-xs font-bold text-white mb-1 truncate">
@@ -344,8 +344,8 @@ export function CodeAuditor() {
                                                 {isRefactoredApplied ? 'Changes Applied!' : 'No Issues Found'}
                                             </div>
                                             <div className="text-sm text-terminal-gray-400">
-                                                {isRefactoredApplied 
-                                                    ? 'All issues have been fixed with the refactored code' 
+                                                {isRefactoredApplied
+                                                    ? 'All issues have been fixed with the refactored code'
                                                     : 'This file has no code quality issues'}
                                             </div>
                                         </motion.div>
@@ -365,13 +365,12 @@ export function CodeAuditor() {
                                             <div className="glass rounded-lg p-4">
                                                 <div className="text-xs text-terminal-gray-400 mb-2">Performance Score</div>
                                                 <div className="flex items-end gap-2">
-                                                    <div className={`text-4xl font-bold ${
-                                                        selectedFile.issues.filter(i => i.severity === 'critical').length > 0 
-                                                            ? 'text-cyber-red' 
+                                                    <div className={`text-4xl font-bold ${selectedFile.issues.filter(i => i.severity === 'critical').length > 0
+                                                            ? 'text-cyber-red'
                                                             : selectedFile.issues.filter(i => i.severity === 'warning').length > 0
-                                                            ? 'text-cyber-yellow'
-                                                            : 'text-cyber-cyan'
-                                                    }`}>
+                                                                ? 'text-cyber-yellow'
+                                                                : 'text-cyber-cyan'
+                                                        }`}>
                                                         {selectedFile.issues.filter(i => i.severity === 'critical').length > 0 ? '35' : '65'}
                                                     </div>
                                                     <div className="text-sm text-terminal-gray-500 mb-1">/100</div>
@@ -431,14 +430,13 @@ export function CodeAuditor() {
                                                         </motion.div>
                                                     )}
                                                 </div>
-                                                <button 
+                                                <button
                                                     onClick={handleApplyChanges}
                                                     disabled={isRefactoredApplied}
-                                                    className={`text-xs px-3 py-1 transition-all ${
-                                                        isRefactoredApplied 
-                                                            ? 'bg-cyber-green bg-opacity-20 text-cyber-green border border-cyber-green cursor-not-allowed' 
+                                                    className={`text-xs px-3 py-1 transition-all ${isRefactoredApplied
+                                                            ? 'bg-cyber-green bg-opacity-20 text-cyber-green border border-cyber-green cursor-not-allowed'
                                                             : 'btn-primary hover:scale-105'
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {isRefactoredApplied ? '✓ Applied' : 'Apply Changes'}
                                                 </button>
@@ -531,7 +529,7 @@ export function CodeAuditor() {
                                             <div className="text-4xl mb-3">📊</div>
                                             <div className="text-sm text-terminal-gray-300 mb-2">No Preview Available</div>
                                             <div className="text-xs text-terminal-gray-500">
-                                                {selectedFile.issues.length === 0 
+                                                {selectedFile.issues.length === 0
                                                     ? 'This file has no issues to compare'
                                                     : 'Select WalletPage.tsx to see comparison'
                                                 }
