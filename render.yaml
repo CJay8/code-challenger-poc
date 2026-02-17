@@ -4,6 +4,7 @@ services:
     name: code-challenge-backend
     env: node
     region: oregon
+    branch: main
     plan: free
     rootDir: backend
     buildCommand: npm install && npm run build
