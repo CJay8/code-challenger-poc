@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-terminal-gray-800;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-terminal-dark text-terminal-gray-100 font-sans;
+    @apply overflow-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-gray-700 rounded-full;
+    @apply hover:bg-terminal-gray-600;
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-terminal-dark;
+  }
+}
+
+/* Component utilities */
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white bg-opacity-5 backdrop-blur-xl;
+    @apply border border-white border-opacity-10;
+    @apply shadow-terminal;
+  }
+
+  .glass-strong {
+    @apply bg-white bg-opacity-10 backdrop-blur-2xl;
+    @apply border border-white border-opacity-20;
+    @apply shadow-terminal-lg;
+  }
+
+  /* Terminal window style */
+  .terminal-window {
+    @apply glass rounded-lg overflow-hidden;
+    @apply border-t border-t-terminal-gray-700;
+  }
+
+  .terminal-header {
+    @apply bg-terminal-light bg-opacity-50 backdrop-blur-sm;
+    @apply border-b border-terminal-gray-700;
+    @apply px-4 py-2 flex items-center justify-between;
+  }
+
+  .terminal-content {
+    @apply p-4 font-mono text-sm;
+  }
+
+  /* Button styles */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium;
+    @apply transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0a0f];
+  }
+
+  .btn-primary {
+    @apply btn bg-cyber-cyan text-terminal-dark;
+    @apply hover:bg-cyber-cyan-light hover:shadow-glow-cyan;
+    @apply focus:ring-cyber-cyan;
+  }
+
+  .btn-secondary {
+    @apply btn bg-cyber-magenta text-white;
+    @apply hover:bg-cyber-magenta-light hover:shadow-glow-magenta;
+    @apply focus:ring-cyber-magenta;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent border border-terminal-gray-700;
+    @apply hover:bg-white hover:bg-opacity-5;
+    @apply focus:ring-cyber-cyan;
+  }
+
+  .btn-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-glow::before {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent;
+    @apply opacity-0 transition-opacity duration-500;
+    content: '';
+    transform: translateX(-100%);
+  }
+
+  .btn-glow:hover::before {
+    @apply opacity-20;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-2 rounded-lg;
+    @apply bg-terminal-light border border-terminal-gray-700;
+    @apply text-terminal-gray-100 placeholder-terminal-gray-500;
+    @apply focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan;
+    @apply transition-all duration-200;
+  }
+
+  /* Card styles */
+  .card {
+    @apply glass rounded-lg p-6;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-300;
+    @apply hover:shadow-glow-cyan hover:border-cyber-cyan hover:border-opacity-50;
+    @apply hover:-translate-y-1;
+  }
+
+  /* Text effects */
+  .text-glow {
+    @apply animate-glow;
+  }
+
+  .text-glow-cyan {
+    @apply text-cyber-cyan animate-glow;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+
+  .text-glow-magenta {
+    @apply text-cyber-magenta animate-glow;
+    text-shadow: 0 0 10px rgba(255, 0, 170, 0.5);
+  }
+
+  .text-glow-green {
+    @apply text-cyber-green animate-glow;
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-cyber-cyan via-cyber-magenta to-cyber-purple;
+  }
+
+  /* Border glow */
+  .border-glow {
+    @apply relative;
+  }
+
+  .border-glow::before {
+    @apply absolute inset-0 rounded-lg;
+    @apply bg-gradient-to-r from-cyber-cyan via-cyber-magenta to-cyber-purple;
+    @apply opacity-50 blur-sm;
+    content: '';
+    z-index: -1;
+    padding: 2px;
+  }
+
+  /* Grid background */
+  .grid-background {
+    background-image: 
+      linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Scanline effect */
+  .scanlines {
+    @apply relative overflow-hidden;
+  }
+
+  .scanlines::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 240, 255, 0.05) 50%
+    );
+    background-size: 100% 4px;
+    animation: scanline 8s linear infinite;
+    z-index: 50;
+  }
+
+  .scanlines::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    opacity: 0.1;
+    z-index: 50;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Backdrop blur utilities */
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+
+  /* Text shadow utilities */
+  .text-shadow-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+
+  .text-shadow-glow-lg {
+    text-shadow: 0 0 15px currentColor, 0 0 30px currentColor, 0 0 45px currentColor;
+  }
+
+  /* Animation delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Perspective for 3D transforms */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom keyframes */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Dark mode specific adjustments */
+.dark {
+  color-scheme: dark;
+}
+
+/* Light mode styles (if needed) */
+.light {
+  @apply bg-white text-gray-900;
+}
+
+.light .glass {
+  @apply bg-black bg-opacity-5;
+  @apply border-gray-200;
+}
+
+.light .glass-strong {
+  @apply bg-black bg-opacity-10;
+  @apply border-gray-300;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

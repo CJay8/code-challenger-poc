@@ -1,0 +1,52 @@
+# Docker Compose for Development
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: terminal-os-backend-dev
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/package.json:/app/package.json
+      - backend-node-modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    command: npm run dev
+    networks:
+      - terminal-os-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: builder
+    container_name: terminal-os-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/package.json:/app/package.json
+      - ./frontend/vite.config.ts:/app/vite.config.ts
+      - frontend-node-modules:/app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3001
+      - VITE_WS_URL=ws://localhost:3001
+    command: npm run dev -- --host
+    networks:
+      - terminal-os-network
+
+networks:
+  terminal-os-network:
+    driver: bridge
+
+volumes:
+  backend-node-modules:
+  frontend-node-modules:
